@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 
-const { result } = defineProps(['result'])
+const { result, timeTook } = defineProps(['result', 'timeTook'])
 
 const router = useRouter()
 </script>
@@ -11,6 +11,12 @@ const router = useRouter()
     <b>
       {{ result }}
     </b>
+    <br />
+    and you took
+    <b>
+      {{ timeTook }}
+    </b>
+    seconds to complete
   </div>
   <button
     @click="router.push('/')"

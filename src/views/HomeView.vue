@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue'
 import { quizzes as q } from '../data/quizzes'
 import QuizCard from '@/components/QuizCard.vue'
+
 const quizzes = ref(q)
 const search = ref('')
 
@@ -12,6 +13,7 @@ watch(search, () => {
 
 <template>
   <div class="max-w-[1000px] mx-auto bg-slate-50">
+
     <header class="flex p-5 gap-10 box-border">
       <h1 class="text-3xl font-black text-green-600 bg-yellow-400 p-2 -skew-x-12 rounded">
         Quizzes

@@ -11,9 +11,7 @@ function validateAnswer(question: any) {
 </script>
 <template>
   <div>
-    <h2 class="text-4xl">
-      {{ question.text }}
-    </h2>
+    <h2 class="text-4xl my-5">{{ question.text }} ?</h2>
 
     <section class="grid gap-2">
       <div

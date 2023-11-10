@@ -6,12 +6,14 @@ import { quizzes } from '@/data/quizzes'
 import { useRoute } from 'vue-router'
 import { computed, ref } from 'vue'
 import ConfettiExplosion from 'vue-confetti-explosion'
+import TimerSection from '@/components/TimerSection.vue'
 
 const route = useRoute()
 const quizid: number = parseInt(route.params.quizId)
 const quiz = quizzes.find((q) => q.id == quizid)
 const currentQuestionIndex = ref(0)
 const showResult = ref(false)
+const timeTook = ref('0:00')
 // console.log(quiz?.questions[currentQuestionIndex.value])
 
 const questionStatus = computed(() => `${currentQuestionIndex.value}/${quiz?.questions.length}`)
@@ -47,8 +49,9 @@ function updateAnswer(value: any) {
       :particleCount="500"
       :force="0.3"
     />
-    <header class="p-10">
+    <header class="p-10 flex items-center justify-between">
       <QuizHeader :barpercentage="barPercentage" :questionStatus="questionStatus" />
+      <TimerSection :showResult="showResult" @time="(v) => (timeTook = v.value)" />
     </header>
     <main class="p-10">
       <QuestionsSection
@@ -59,6 +62,7 @@ function updateAnswer(value: any) {
       <ResultSection
         v-else
         :result="`${numberOfCorrectAnswers.length}/${quiz?.questions.length}`"
+        :time-took="timeTook"
       />
     </main>
   </div>
