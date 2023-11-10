@@ -56,7 +56,6 @@ watch(
 <template>
   <div>
     <h1 class="text-3xl">Timer: {{ formattedTime() }}</h1>
-    <button @click="stopTimer()">stop</button>
   </div>
 </template>
 
