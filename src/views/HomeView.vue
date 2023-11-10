@@ -1,8 +1,7 @@
 <script setup lang="ts">
-//@ts-ignore
-import Card from '@/components/Card.vue'
 import { ref, watch } from 'vue'
 import { quizzes as q } from '../data/quizzes'
+import QuizCard from '@/components/QuizCard.vue'
 const quizzes = ref(q)
 const search = ref('')
 
@@ -20,7 +19,7 @@ watch(search, () => {
       <input v-model.trim="search" type="text" placeholder="Search..." class="p-2 outline-none" />
     </header>
     <main class="flex flex-wrap gap-3 p-2">
-      <Card v-for="quiz in quizzes" :key="quiz.id" :quiz="quiz" />
+      <QuizCard v-for="quiz in quizzes" :key="quiz.id" :quiz="quiz" />
     </main>
   </div>
 </template>

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import QuizHeader from '@/components/QuizHeader.vue'
-import Questions from '@/components/Questions.vue'
-import Result from '@/components/Result.vue'
+import QuestionsSection from '@/components/QuestionsSection.vue'
+import ResultSection from '@/components/ResultSection.vue'
 import { quizzes } from '@/data/quizzes'
 import { useRoute } from 'vue-router'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
 const route = useRoute()
 const quizid: number = parseInt(route.params.quizId)
@@ -44,12 +44,15 @@ function updateAnswer(value: any) {
       <QuizHeader :barpercentage="barPercentage" :questionStatus="questionStatus" />
     </header>
     <main class="p-10">
-      <Questions
+      <QuestionsSection
         v-if="!showResult"
         :question="quiz?.questions[currentQuestionIndex]"
         @selectedOption="updateAnswer"
       />
-      <Result v-else :result="`${numberOfCorrectAnswers.length}/${quiz?.questions.length}`" />
+      <ResultSection
+        v-else
+        :result="`${numberOfCorrectAnswers.length}/${quiz?.questions.length}`"
+      />
     </main>
   </div>
 </template>
