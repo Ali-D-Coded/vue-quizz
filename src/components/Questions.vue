@@ -1,13 +1,12 @@
 <script setup lang="ts">
 const { question } = defineProps(['question'])
 
-const emit = defineEmits(['isCorrect', 'updateIndex'])
+const emit = defineEmits(['selectedOption'])
 
 function validateAnswer(question: any) {
-  emit('updateIndex')
-  if (question.isCorrect) {
-    emit('isCorrect', question)
-  }
+  // if (question.isCorrect) {
+  emit('selectedOption', question)
+  // }
 }
 </script>
 <template>

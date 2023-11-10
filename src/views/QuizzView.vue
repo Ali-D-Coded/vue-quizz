@@ -13,7 +13,7 @@ const currentQuestionIndex = ref(0)
 const showResult = ref(false)
 // console.log(quiz?.questions[currentQuestionIndex.value])
 
-const questionStatus = computed(() => `${currentQuestionIndex.value + 1}/${quiz?.questions.length}`)
+const questionStatus = computed(() => `${currentQuestionIndex.value}/${quiz?.questions.length}`)
 const barPercentage = computed(
   () => `${(currentQuestionIndex.value / quiz?.questions?.length) * 100}%`
 )
@@ -27,18 +27,19 @@ function updateAnswer(value: any) {
       `${a.id}_${a.text}_${a.label}_${a.isCorrect}` ===
       `${value.id}_${value.text}_${value.label}_${value.isCorrect}`
   )
-  if (!exists) {
+  if (!exists && value.isCorrect) {
     numberOfCorrectAnswers.value.push(value)
   }
-  if (quiz?.questions?.length - 1 === currentQuestionIndex.value) {
+  console.log(quiz?.questions?.length - 1, currentQuestionIndex.value)
+  if (+quiz?.questions?.length - 1 === +currentQuestionIndex.value) {
     showResult.value = true
   }
+  currentQuestionIndex.value++
 }
 </script>
 
 <template>
   <div class="max-w-[1000px] mx-auto bg-slate-50">
-    {{ numberOfCorrectAnswers }}
     <header class="p-10">
       <QuizHeader :barpercentage="barPercentage" :questionStatus="questionStatus" />
     </header>
@@ -46,10 +47,9 @@ function updateAnswer(value: any) {
       <Questions
         v-if="!showResult"
         :question="quiz?.questions[currentQuestionIndex]"
-        @isCorrect="updateAnswer"
-        @updateIndex="currentQuestionIndex++"
+        @selectedOption="updateAnswer"
       />
-      <Result v-else />
+      <Result v-else :result="`${numberOfCorrectAnswers.length}/${quiz?.questions.length}`" />
     </main>
   </div>
 </template>
