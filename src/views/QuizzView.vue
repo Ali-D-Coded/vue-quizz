@@ -49,7 +49,7 @@ function updateAnswer(value: any) {
       :particleCount="500"
       :force="0.3"
     />
-    <header class="p-10 flex items-center justify-between">
+    <header class="p-10 flex flex-col sm:flex-row items-center justify-between gap-5">
       <QuizHeader :barpercentage="barPercentage" :questionStatus="questionStatus" />
       <TimerSection :showResult="showResult" @time="(v) => (timeTook = v.value)" />
     </header>
