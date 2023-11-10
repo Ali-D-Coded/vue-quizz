@@ -5,6 +5,7 @@ import ResultSection from '@/components/ResultSection.vue'
 import { quizzes } from '@/data/quizzes'
 import { useRoute } from 'vue-router'
 import { computed, ref } from 'vue'
+import ConfettiExplosion from 'vue-confetti-explosion'
 
 const route = useRoute()
 const quizid: number = parseInt(route.params.quizId)
@@ -40,6 +41,12 @@ function updateAnswer(value: any) {
 
 <template>
   <div class="max-w-[1000px] mx-auto bg-slate-50">
+    <ConfettiExplosion
+      v-if="showResult"
+      class="absolute top-0 left-[50%] w-full h-full"
+      :particleCount="500"
+      :force="0.3"
+    />
     <header class="p-10">
       <QuizHeader :barpercentage="barPercentage" :questionStatus="questionStatus" />
     </header>
